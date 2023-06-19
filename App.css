@@ -14,7 +14,7 @@
 .mv-container{
   width: 350px;
   margin: 30px;
-  padding-top: 70px;
+  padding-top: 200px;
   
 }  
 .mv-list{
@@ -26,9 +26,10 @@
   width:70px;
   height: 45px;
   border-radius: 15px;
-  gap: 25px;
+  gap:30px;
   font-size: 20px;
 }
+
 .new-mv-adding{
   display: flex;
   flex-direction: column;
