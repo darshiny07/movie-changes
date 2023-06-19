@@ -1,11 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import {useState} from "react"
-
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 // first component
-function App() {
 
+function App() {
   const movieAdd =
   
       [{
@@ -85,46 +88,52 @@ function App() {
       "Remy, a rat, aspires to become a renowned French chef. However, he fails to realise that people despise rodents and will never enjoy a meal cooked by him.",
       }];
 
+// adding more films
 
-  
-      const[name,setName] = useState("");
-      const [poster,setPoster] = useState("");
-      const[rating,setRating] = useState("");
-      const[summary,setSummary] = useState("");
-      const [user,setUser] = useState(movieAdd)
-
+const[name,setName] = useState("");
+const [poster,setPoster] = useState("");
+const[rating,setRating] = useState("");
+const[summary,setSummary] = useState("");
+const [user,setUser] = useState(movieAdd)
   return (
     <div className="App">
 
-      <div className='new-mv-adding'>
-
-    <input className='new-mv-name' placeholder='Movie name' onChange={(event) => setName(event.target.value)}/>
-    <input className='new-mv-poster' placeholder='Paste the url' onChange={(event) => setPoster(event.target.value)}/>
-    <input className='new-mv-rating' placeholder='give movie rating' onChange={(event) => setRating(event.target.value)}/> 
-    <input className='new-mv-summary' placeholder='movie summary' onChange={(event) => setSummary(event.target.value)}/> 
-    <button className='new-mv-submit'onClick={()=>
-    {
-      const newFilm ={
-        name: name,
-        poster: poster,
-        rating: rating,
-        summary: summary
-      }
-      setUser([...user,newFilm]) }}>submit</button>
-      </div>
-
-      <div className="mv-list">
+<div className='new-mv-adding'>
+<TextField id="standard-basic" label="Movie Name" variant="standard" className='new-mv-name' placeholder='Movie name' onChange={(event) => setName(event.target.value)}/>
+{/* <input className='new-mv-name' placeholder='Movie name' onChange={(event) => setName(event.target.value)}/> */}
+<TextField id="standard-basic" label="Movie url" variant="standard" className='new-mv-poster' placeholder='Paste the url' onChange={(event) => setPoster(event.target.value)}/>
+{/* <input className='new-mv-poster' placeholder='Paste the url' onChange={(event) => setPoster(event.target.value)}/> */}
+<TextField id="standard-basic" label="Rating" variant="standard" className='new-mv-rating' placeholder='give movie rating' onChange={(event) => setRating(event.target.value)}/>
+{/* <input className='new-mv-rating' placeholder='give movie rating' onChange={(event) => setRating(event.target.value)}/>  */}
+<TextField id="standard-basic" label="Summary" variant="standard" className='new-mv-summary' placeholder='movie summary' onChange={(event) => setSummary(event.target.value)}/>
+{/* <input className='new-mv-summary' placeholder='movie summary' onChange={(event) => setSummary(event.target.value)}/>  */}
+    <Button variant="contained"onClick={()=>
+{
+  const newFilm ={
+    name: name,
+    poster: poster,
+    rating: rating,
+    summary: summary
+  }
+  setUser([...user,newFilm]) }}>Submit</Button>
+  
+  </div>
+  
+<div className="mv-list">
+        {/* maping with movie list */}
  {movieAdd.map(item => <Movie movieList={item}/>)}
- </div>
     </div>
+         </div> 
   );
 }
 
+// like dislike button
 function Testing() {
   const [like, setLike] = useState(0);
   const [dislike, setDisLike] = useState(0);
   return (
     <div>
+
       <button className="btn"onClick={() => setLike(like + 1)}> 👍{like} </button>
       <button className="btn" onClick={() => setDisLike(dislike + 1)}>👎{dislike} </button>
     </div>
@@ -144,15 +153,17 @@ function Movie({movieList}){
 // }
 
 
-// summary read more
+// summary read more..
 let [display,setDisplay] =useState(true);
 
 let sumry={
   display:display? "block" : "none",}
+// summary read more..
 
 // rating color change
 let styles={color: movieList.rating> 7 ?"green":"red"};
-
+// rating color change
+ 
   return(
     <div className="mv-container">
       <img className="mv-poster"src={movieList.poster} alt={movieList.poster}></img>
@@ -160,7 +171,9 @@ let styles={color: movieList.rating> 7 ?"green":"red"};
       <h1 className="mv-name" >{movieList.name}</h1>
       <p className="mv-rating" style={styles}>{movieList.rating}⭐ </p></div>
       <hr></hr>
-      <button onClick={()=>setDisplay(!display)}>Read more..</button>
+      <Stack direction="row" spacing={2}>
+      <Button onClick={()=>setDisplay(!display)}>Read more..</Button></Stack>
+      {/* <button onClick={()=>setDisplay(!display)}>Read more..</button> */}
       <p className="mv-summary"style={sumry}>{movieList.summary}</p>
       <Testing/>
     </div>
