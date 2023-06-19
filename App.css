@@ -1,0 +1,39 @@
+.mv-poster{
+  height: 420px;
+  width:320px;
+}
+
+.mv-summary{
+  width: 350px;
+ 
+}
+.mv-display{
+  display: flex;
+  justify-content: space-between;
+}
+.mv-container{
+  width: 350px;
+  margin: 30px;
+  padding-top: 70px;
+  
+}  
+.mv-list{
+  display: flex;
+   flex-wrap:wrap ;
+}
+
+.btn{
+  width:70px;
+  height: 45px;
+  border-radius: 15px;
+  gap: 25px;
+  font-size: 20px;
+}
+.new-mv-adding{
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 20px;
+  padding: 30px;
+  gap:8px;
+}
