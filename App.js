@@ -5,12 +5,28 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { FcLike } from "react-icons/fc";
+import { FcLikePlaceholder } from "react-icons/fc";
+import Icon from '@mui/material/Icon';
+import Home from "./Home.js";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
+// Route import
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Routes,
+  Route,
+  NavLink,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 
 // first component
 
 function App() {
   const movieAdd =
-  
+ 
       [{
       name: "Vikram",
       poster:
@@ -98,15 +114,25 @@ const [user,setUser] = useState(movieAdd)
   return (
     <div className="App">
 
+  <li>
+  <NavLink to="/"> Home </NavLink>
+  </li>
+  
+  <Routes>
+  <Route path="/home" element={<Home/>}/>
+</Routes>
+
+    
+{/* movie input */}
 <div className='new-mv-adding'>
 <TextField id="standard-basic" label="Movie Name" variant="standard" className='new-mv-name' placeholder='Movie name' onChange={(event) => setName(event.target.value)}/>
 {/* <input className='new-mv-name' placeholder='Movie name' onChange={(event) => setName(event.target.value)}/> */}
 <TextField id="standard-basic" label="Movie url" variant="standard" className='new-mv-poster' placeholder='Paste the url' onChange={(event) => setPoster(event.target.value)}/>
-{/* <input className='new-mv-poster' placeholder='Paste the url' onChange={(event) => setPoster(event.target.value)}/> */}
+
 <TextField id="standard-basic" label="Rating" variant="standard" className='new-mv-rating' placeholder='give movie rating' onChange={(event) => setRating(event.target.value)}/>
-{/* <input className='new-mv-rating' placeholder='give movie rating' onChange={(event) => setRating(event.target.value)}/>  */}
+
 <TextField id="standard-basic" label="Summary" variant="standard" className='new-mv-summary' placeholder='movie summary' onChange={(event) => setSummary(event.target.value)}/>
-{/* <input className='new-mv-summary' placeholder='movie summary' onChange={(event) => setSummary(event.target.value)}/>  */}
+
     <Button variant="contained"onClick={()=>
 {
   const newFilm ={
@@ -134,8 +160,8 @@ function Testing() {
   return (
     <div>
 
-      <button className="btn"onClick={() => setLike(like + 1)}> 👍{like} </button>
-      <button className="btn" onClick={() => setDisLike(dislike + 1)}>👎{dislike} </button>
+      <button className="btn"onClick={() => setLike(like + 1)}><FcLike />{like} </button> 
+      <button className="btn" onClick={() => setDisLike(dislike + 1)}><FcLikePlaceholder/> {dislike} </button>
     </div>
   );
 }
@@ -154,7 +180,7 @@ function Movie({movieList}){
 
 
 // summary read more..
-let [display,setDisplay] =useState(true);
+let [display,setDisplay] =useState(false);
 
 let sumry={
   display:display? "block" : "none",}
@@ -163,21 +189,23 @@ let sumry={
 // rating color change
 let styles={color: movieList.rating> 7 ?"green":"red"};
 // rating color change
- 
+const navigate = useNavigate();
   return(
     <div className="mv-container">
       <img className="mv-poster"src={movieList.poster} alt={movieList.poster}></img>
       <div className="mv-display">
-      <h1 className="mv-name" >{movieList.name}</h1>
-      <p className="mv-rating" style={styles}>{movieList.rating}⭐ </p></div>
+      <h1 className="mv-name" >{movieList.name}</h1> 
+     <p className="mv-rating" style={styles}>{movieList.rating}⭐ </p></div>
       <hr></hr>
       <Stack direction="row" spacing={2}>
-      <Button onClick={()=>setDisplay(!display)}>Read more..</Button></Stack>
-      {/* <button onClick={()=>setDisplay(!display)}>Read more..</button> */}
+      <Button onClick={()=>setDisplay(!display)} >Read more.. </Button >  <Icon color="primary">add_circle</Icon> </Stack>
       <p className="mv-summary"style={sumry}>{movieList.summary}</p>
+
       <Testing/>
     </div>
   )
 }
+
+
 
 export default App;
